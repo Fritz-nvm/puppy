@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block active_about %} active {% endblock active_about %}
+
+
+
+{% block content %}
+<!-- About Section -->
+<section id="about" class="about section light-background">
+  <br><br><br><br><br><br>
+  <div class="container section-title" data-aos="fade-up">
+    <h2>About Us</h2>
+    <div><span>
+      Our Goal
+    </span> <span class="description-title"></span></div>
+  </div><!-- End Section Title -->
+
+
+    <div class="container">
+
+      <div class="row gy-4">
+        <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
+          <img src="{% static 'assets/img/cute-running-dog.jpg' %}" class="img-fluid" alt="">
+          <a href="#" class="glightbox pulsating-play-btn"></a>
+        </div>
+        <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
+          <h3>Welcome to PuppyGo! We are a passionate team of dog lovers dedicated to enhancing the lives of dogs and their owners</h3>
+          <p class="fst-italic">
+            With years of experience in pet care and a deep love for dogs,
+            and a 
+          </p>
+          <ul>
+            <li><i class="bi bi-check2-all"></i> <span>we strive to be your go-to resource for everything related to your four-legged friends</span></li>
+            <li><i class="bi bi-check2-all"></i> <span> Our mission is to provide valuable information, quality services,</span></li>
+            <li><i class="bi bi-check2-all"></i> <span>supportive community for all dog enthusiasts.</span></li>
+          </ul>
+          <p>
+            Join us on this journey to celebrate the unconditional love and joy that dogs bring into our lives!
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </section><!-- /About Section -->
+{% endblock content %}

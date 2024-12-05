@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / compressed Python files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+.venv/
+.venv3/
+pip-log.txt
+
+# Django generated files
+*.log
+db.sqlite3/
+
+staticfiles/
+
+
+# Ignore IDE or editor specific files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Ignore migrations
+*/migrations/
