@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions', 
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
@@ -51,6 +51,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+WSGI_APPLICATION = 'puppy.wsgi.application'
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 ROOT_URLCONF = 'puppy.urls'
 
@@ -70,7 +75,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'puppy.wsgi.application'
 
 
 # Database

@@ -26,9 +26,9 @@
                 <img src="{{ item.image.url }}" alt="{{ item.name }}" class="card-img-top">
                 <a href="{% url 'myapp:details' item.id %}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <p class="price">${{ item.price }}</p>
-                        <p class="location">Location: {{ item.location }}</p>
+                        <h5 class="card-title">Name: {{ item.name }}</h5>
+                        <p class="price">Price: {{ item.price }} $</p>
+                        <p class="location">Age: {{ item.age }}</p>
                     </div>
                 </a>
             </div>

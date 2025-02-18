@@ -1,5 +1,9 @@
-from django.shortcuts import render
-from .models import Items
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.http import urlencode
+from django.views.decorators.http import require_POST
+from .models import Item
+from .cart import Cart
+
 
 # Create your views here.
 
@@ -15,8 +19,11 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def checkout(request):
+    return render(request, 'checkout.html')
+
 def store(request):
-    items = Items.objects.all()
+    items = Item.objects.all()
     context = {
         'items':items
     }
@@ -24,10 +31,62 @@ def store(request):
 
 
 def details(request, pk):
-    item = Items.objects.get(id = pk)
+    item = Item.objects.get(id = pk)
     context = {
         'item':item
     }
     return render(request, 'details.html', context)
 
 
+
+# add to cart functions
+@require_POST
+def add_to_cart(request, item_id):
+    cart = Cart(request)
+    item = get_object_or_404(Item, id = item_id)
+    quantity = int(request.POST.get('quantity', 1))
+    cart.add(item.id, quantity)
+  
+    return redirect('myapp:cart detail')
+
+def cart_detail(request):
+    cart = Cart(request)
+    context = {
+        'cart':cart
+    }
+    return render(request, 'cart_detail.html', context)
+
+
+def remove_from_cart(request, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    # Remove the item from the cart
+    cart = Cart(request)
+    cart.remove(item.id)
+    return redirect('cart_detail')
+#checkout views
+
+def checkout(request):
+    cart = Cart(request)
+    
+    # Redirect to cart detail if the cart is empty
+    if not cart.cart:
+        return redirect('cart_detail')
+    
+    # Prepare the email body
+    subject = 'Order Request'
+    body = 'Hello, \n\n I would like to place an order for the following items: \n\n'
+    
+    for item in cart:
+        body += f"- {item['item'].name} (x{item['quantity']}): ${item['total_price']}\n"
+    
+    body += f'\nTotal Price: ${cart.get_total_price()}\n\nPlease confirm the order.\n\nThank you!'
+    
+    # Encode the subject and body for the mailto link
+    params = {
+        'subject': subject,
+        'body': body,
+    }
+    mailto_link = f"mailto:charlottefisherkennel@gmail.com?{urlencode(params)}"
+    
+    # Redirect to the mailto link
+    return render(request, 'checkout.html', {'mailto_link': mailto_link})

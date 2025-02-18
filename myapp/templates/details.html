@@ -32,15 +32,29 @@
                 <h3>Item information</h3> 
                 <ul>
                   <li><strong>Name</strong>: {{ item.name }}</li>
-                  <li><strong>Price</strong>: ${{ item.price }}</li>
-                  <li><strong>Location</strong>: {{ item.location }}</li>
+                  <li><strong>Price</strong>: {{ item.price }}$</li>
+                  <li><strong>Age</strong>: {{ item.age }}</li>
                </ul>
                 <div class="portfolio-description">
                   <h2>description</h2>
                   <p>{{ item.description }}</p>
                 </div>
               </div>
+              <div class="carousel-item active">
+                <div class="carousel-container">
+                  <div>
+                    <form action="{% url 'myapp:add to cart' item.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="number" name="quantity" value="1" min="1">
+                      <button type="submit" class="btn-get-started">Add to Cart </button>
+                    </form>
+                  </div>
+                </div>
+              </div><!-- End Carousel Item -->
+        
+
             </div>
+           
            
           </div>
         </div>
